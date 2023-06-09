@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../app/shared/shared.module';
-import { NavbarComponent } from './app/navbar/navbar.component';
-import { HeaderComponent } from './app/header/header.component';
 import { RootModule } from '../../app/root.module';
 import { NavbarModule } from '../../app/navbar/navbar.module';
 import { SharedBrowseByModule } from '../../app/shared/browse-by/shared-browse-by.module';
 import { ResultsBackButtonModule } from '../../app/shared/results-back-button/results-back-button.module';
-import { UmdEnvironmentBannerComponent } from './app/umd-environment-banner/umd-environment-banner.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './app/footer/footer.component';
 
 /**
  * Add components that use a custom decorator to ENTRY_COMPONENTS as well as DECLARATIONS.
@@ -19,9 +17,7 @@ const ENTRY_COMPONENTS = [];
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
   BreadcrumbsComponent,
-  HeaderComponent,
-  NavbarComponent,
-  UmdEnvironmentBannerComponent,
+  FooterComponent,
 ];
 
 @NgModule({

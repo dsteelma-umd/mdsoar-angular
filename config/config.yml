@@ -6,6 +6,9 @@ rest:
 
 # UMD Customization
 themes:
+  - name: 'mdsoar-frostburg'
+    extends: 'mdsoar'
+    handle: 11603/1
   - name: 'mdsoar'
     extends: 'dspace'
     headTags:
