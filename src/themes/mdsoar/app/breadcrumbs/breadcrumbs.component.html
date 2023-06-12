@@ -1,0 +1,35 @@
+<ng-container *ngVar="(breadcrumbs$ | async) as breadcrumbs">
+  <nav *ngIf="(showBreadcrumbs$ | async)" aria-label="breadcrumb" class="nav-breadcrumb">
+      <ol class="container breadcrumb">
+
+        <ng-template [ngIf]="communityLogoPath">
+          <ng-container *ngTemplateOutlet="communityLogo; context {imageUrl: communityLogoPath, url: breadcrumbs[0].url}"></ng-container>
+        </ng-template>
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        <ng-container
+          *ngTemplateOutlet="breadcrumbs?.length > 0 ? breadcrumb : activeBreadcrumb; context: {text: 'home.breadcrumbs', url: '/'}">
+        </ng-container>
+
+        <ng-container *ngFor="let bc of breadcrumbs; let last = last;">
+              <ng-container *ngTemplateOutlet="!last ? breadcrumb : activeBreadcrumb; context: bc"></ng-container>
+          </ng-container>
+      </ol>
+  </nav>
+
+  <ng-template #communityLogo let-imageUrl="imageUrl" let-url="url">
+    <li>
+      <a [routerLink]="url">
+        <img [src]="imageUrl" class="community_logo" />
+      </a>
+    </li>
+  </ng-template>
+
+  <ng-template #breadcrumb let-text="text" let-url="url" let-noLimit="noLimit">
+      <li class="breadcrumb-item"><div><a [routerLink]="url" [ngbTooltip]="text | translate" placement="bottom" >{{text | translate}}</a></div></li>
+  </ng-template>
+
+  <ng-template #activeBreadcrumb let-text="text">
+      <li class="breadcrumb-item active" aria-current="page"><div><div>{{text | translate}}</div></div></li>
+  </ng-template>
+</ng-container>
+

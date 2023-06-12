@@ -46,6 +46,24 @@ export const copyWebpackOptions = {
         }
       },
     },
+    // UMD Customization
+    {
+      // replace(/\\/g, '/') because glob patterns need forward slashes, even on windows:
+      // https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-windows
+      from: path.join(__dirname, '..', 'src', 'themes', '*', 'k8s-assets', '**', '*').replace(/\\/g, '/'),
+      noErrorOnMissing: true,
+      to({ absoluteFilename }) {
+        // use [\/|\\] to match both POSIX and Windows separators
+        const matches = absoluteFilename.match(/.*[\/|\\]themes[\/|\\]([^\/|^\\]+)[\/|\\]k8s-assets[\/|\\](.+)$/);
+        if (matches) {
+          // matches[1] is the theme name
+          // matches[2] is the rest of the path relative to the assets folder
+          // e.g. themes/custom/assets/images/logo.png will end up in assets/custom/images/logo.png
+          return path.join('assets', 'k8s', matches[1], matches[2]);
+        }
+      },
+    },
+    // End UMD Customization
     {
       from: path.join(__dirname, '..', 'src', 'robots.txt.ejs'),
       to: 'assets/robots.txt.ejs'

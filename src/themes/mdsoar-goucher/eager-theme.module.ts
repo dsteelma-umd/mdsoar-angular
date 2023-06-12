@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../app/shared/shared.module';
-import { NavbarComponent } from './app/navbar/navbar.component';
-import { HeaderComponent } from './app/header/header.component';
-import { RootModule } from '../../app/root.module';
-import { NavbarModule } from '../../app/navbar/navbar.module';
-import { UmdEnvironmentBannerComponent } from './app/umd-environment-banner/umd-environment-banner.component';
 import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './app/footer/footer.component';
 
@@ -18,16 +13,11 @@ const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
   BreadcrumbsComponent,
   FooterComponent,
-  HeaderComponent,
-  NavbarComponent,
-  UmdEnvironmentBannerComponent,
 ];
 
 @NgModule({
   imports: [
     SharedModule,
-    RootModule,
-    NavbarModule,
   ],
   declarations: DECLARATIONS,
   providers: [
