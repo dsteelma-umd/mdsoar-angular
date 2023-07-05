@@ -1,0 +1,149 @@
+<ds-themed-results-back-button *ngIf="showBackButton | async" [back]="back"></ds-themed-results-back-button>
+<div class="row" *ngIf="iiifEnabled">
+  <div class="col-12">
+    <ds-mirador-viewer id="iiif-viewer"
+                   [object]="object"
+                   [searchable]="iiifSearchEnabled"
+                   [query]="iiifQuery$ | async">
+    </ds-mirador-viewer>
+  </div>
+</div>
+
+<div class="d-flex flex-row">
+  <ds-item-page-title-field [item]="object" class="mr-auto">
+  </ds-item-page-title-field>
+  <ds-dso-edit-menu></ds-dso-edit-menu>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <!-- Thumbnail -->
+    <ng-container *ngIf="!mediaViewer.image">
+      <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+        <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+      </ds-metadata-field-wrapper>
+    </ng-container>
+    <ng-container *ngIf="mediaViewer.image">
+      <ds-media-viewer [item]="object" [videoOptions]="mediaViewer.video"></ds-media-viewer>
+    </ng-container>
+
+    <!-- Files -->
+    <ds-themed-item-page-file-section [item]="object"></ds-themed-item-page-file-section>
+
+    <!-- Permanent Link -->
+    <ds-item-page-uri-field [item]="object"
+      [fields]="['dc.identifier.uri']"
+      [label]="'item.page.uri'">
+    </ds-item-page-uri-field>
+    <!-- Collections -->
+    <ds-item-page-collections [item]="object"></ds-item-page-collections>
+
+    <!-- Full item page -->
+    <div>
+      <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button">
+        <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}
+      </a>
+    </div>
+
+
+
+    <!-- <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dc.contributor.author', 'dc.creator']"
+      [label]="'relationships.isAuthorOf' | translate">
+    </ds-metadata-representation-list>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['journal.title']"
+      [label]="'item.page.journal-title'">
+    </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['journal.identifier.issn']"
+      [label]="'item.page.journal-issn'">
+    </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['journalvolume.identifier.name']"
+      [label]="'item.page.volume-title'">
+    </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.publisher']"
+      [label]="'item.page.publisher'">
+    </ds-generic-item-page-field> -->
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <!-- Author/Creator -->
+    <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dc.contributor.author']"
+      [label]="'relationships.isAuthorOf' | translate">
+    </ds-metadata-representation-list>
+
+    <!-- Author/Creator ORCID -->
+    <ds-metadata-representation-list class="ds-item-page-mixed-author-field"
+      [parentItem]="object"
+      [itemType]="'Person'"
+      [metadataFields]="['dc.creator']"
+      [label]="'relationships.isAuthorOf.Orcid' | translate">
+    </ds-metadata-representation-list>
+
+    <!-- Date -->
+    <ds-item-page-date-field [item]="object"></ds-item-page-date-field>
+
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.date', 'dc.date.created',
+                 'dc.date.copyright', 'dctermscreated', 'dctermsdate',
+                 'dcterms.dateAccepted', 'dcterms.dateCopyrighted',
+                 ]"
+      [label]="'item.page.date'">
+    </ds-generic-item-page-field>
+
+    <!-- Type of Work-->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.genre', 'dc.type', 'dc.format', 'dcterms.format']"
+      [label]="'item.page.typeOfWork'">
+    </ds-generic-item-page-field>
+
+    <!-- Department -->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.contributor.department']"
+      [label]="'item.page.department'">
+    </ds-generic-item-page-field>
+
+    <!-- Program -->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.contributor.program']"
+      [label]="'item.page.program'">
+    </ds-generic-item-page-field>
+
+    <!-- Citation of Original Publication -->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.identifier.citation', 'dcterms.bibiographicCitation']"
+      [label]="'item.page.citation'">
+    </ds-generic-item-page-field>
+
+    <!-- Rights -->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.rights', 'dcterms.accessRights']"
+      [label]="'item.page.rights'">
+    </ds-generic-item-page-field>
+
+    <!-- Subjects -->
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.subject', 'dc.subject.lcsh', 'dc.subject.mesh', 'dc.coverage.temporal', 'dc.coverage.spatial']"
+      [label]="'item.page.subject'">
+    </ds-generic-item-page-field>
+
+    <!-- Abstract -->
+    <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field>
+    <!-- <ds-generic-item-page-field [item]="object"
+      [fields]="['dc.description']"
+      [label]="'item.page.description'">
+    </ds-generic-item-page-field> -->
+
+    <!-- <ds-item-page-uri-field [item]="object"
+      [fields]="['dc.identifier.uri']"
+      [label]="'item.page.uri'">
+    </ds-item-page-uri-field> -->
+    <!-- <ds-item-page-collections [item]="object"></ds-item-page-collections> -->
+  </div>
+</div>
