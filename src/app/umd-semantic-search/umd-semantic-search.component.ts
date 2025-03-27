@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ds-semantic-search',
   // styleUrls: ['./login-page.component.scss'],
-  styleUrls: ['./semantic-search.component.scss'],
+  styleUrls: ['./umd-semantic-search.component.scss'],
   // templateUrl: './login-page.component.html'
-  templateUrl: './semantic-search.component.html'
+  templateUrl: './umd-semantic-search.component.html'
 })
-export class SemanticSearchComponent {
+export class UmdSemanticSearchComponent {
 }

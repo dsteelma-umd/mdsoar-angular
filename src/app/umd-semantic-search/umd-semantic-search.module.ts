@@ -9,11 +9,11 @@ import { SearchConfigurationService } from '../core/shared/search/search-configu
 import { JournalEntitiesModule } from '../entity-groups/journal-entities/journal-entities.module';
 import { ResearchEntitiesModule } from '../entity-groups/research-entities/research-entities.module';
 import { SearchModule } from '../shared/search/search.module';
-import { SemanticSearchComponent } from './semantic-search.component';
+import { UmdSemanticSearchComponent } from './umd-semantic-search.component';
 import { ConfigurationSearchPageGuard } from '../search-page/configuration-search-page.guard';
 
 const components = [
-  SemanticSearchComponent,
+  UmdSemanticSearchComponent,
 ];
 
 @NgModule({
@@ -39,5 +39,5 @@ const components = [
 /**
  * This module handles all components and pipes that are necessary for the search page
  */
-export class SemanticSearchModule {
+export class UmdSemanticSearchModule {
 }

@@ -145,9 +145,9 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
-            path: 'semantic-search',
-            loadChildren: () => import('./semantic-search/semantic-search-routing.module')
-              .then((m) => m.SemanticSearchRoutingModule),
+            path: 'umd-semantic-search',
+            loadChildren: () => import('./umd-semantic-search/umd-semantic-search-routing.module')
+              .then((m) => m.UmdSemanticSearchRoutingModule),
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {

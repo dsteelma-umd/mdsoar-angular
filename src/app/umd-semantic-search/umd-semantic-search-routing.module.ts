@@ -3,19 +3,19 @@ import { RouterModule } from '@angular/router';
 
 import { I18nBreadcrumbResolver } from '../core/breadcrumbs/i18n-breadcrumb.resolver';
 import { I18nBreadcrumbsService } from '../core/breadcrumbs/i18n-breadcrumbs.service';
-import { SemanticSearchModule } from './semantic-search.module';
-import { SemanticSearchComponent } from './semantic-search.component';
+import { UmdSemanticSearchModule } from './umd-semantic-search.module';
+import { UmdSemanticSearchComponent } from './umd-semantic-search.component';
 import { ConfigurationSearchPageGuard } from '../search-page/configuration-search-page.guard';
 
 @NgModule({
   imports: [
-    SemanticSearchModule,
+    UmdSemanticSearchModule,
     RouterModule.forChild([{
         path: '',
         resolve: { breadcrumb: I18nBreadcrumbResolver }, data: { title: 'search.title', breadcrumbKey: 'search' },
         children: [
-          { path: '', component: SemanticSearchComponent },
-          { path: ':configuration', component: SemanticSearchComponent, canActivate: [ConfigurationSearchPageGuard] }
+          { path: '', component: UmdSemanticSearchComponent },
+          { path: ':configuration', component: UmdSemanticSearchComponent, canActivate: [ConfigurationSearchPageGuard] }
         ]
       }]
     )
@@ -25,5 +25,5 @@ import { ConfigurationSearchPageGuard } from '../search-page/configuration-searc
     I18nBreadcrumbsService
   ]
 })
-export class SemanticSearchRoutingModule {
+export class UmdSemanticSearchRoutingModule {
 }

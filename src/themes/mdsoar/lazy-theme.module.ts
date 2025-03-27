@@ -24,7 +24,7 @@ import { RegisterEmailFormModule } from '../../app/register-email-form/register-
 import { ResearchEntitiesModule } from '../../app/entity-groups/research-entities/research-entities.module';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { SearchPageModule } from '../../app/search-page/search-page.module';
-import { SemanticSearchModule } from 'src/app/semantic-search/semantic-search.module';
+import { UmdSemanticSearchModule } from 'src/app/umd-semantic-search/umd-semantic-search.module';
 import { SharedModule } from '../../app/shared/shared.module';
 import { StatisticsModule } from '../../app/statistics/statistics.module';
 import { StoreModule } from '@ngrx/store';
@@ -96,7 +96,7 @@ const DECLARATIONS = [
     RouterModule,
     ScrollToModule,
     SearchPageModule,
-    SemanticSearchModule,
+    UmdSemanticSearchModule,
     SharedModule,
     SharedBrowseByModule,
     StatisticsModule,
