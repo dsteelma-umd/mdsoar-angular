@@ -5,12 +5,16 @@
       placeholder="Enter search term"
       class="search-input"
     />
-  </div>
+</div>
 
-  <div class="results-container">
+<div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner"></div> <!-- Add your spinner styling here -->
+</div>
+
+<div class="results-container" *ngIf="!isLoading">
     <ul>
-      <li *ngFor="let result of results">
-        {{ result | json }}
-      </li>
+        <li *ngFor="let result of results">
+            {{ result | json }}
+        </li>
     </ul>
-  </div>
+</div>

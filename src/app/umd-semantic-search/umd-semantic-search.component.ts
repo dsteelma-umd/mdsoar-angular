@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, finalize, switchMap } from 'rxjs/operators';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'ds-semantic-search',
@@ -11,8 +12,9 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class UmdSemanticSearchComponent {
   searchControl = new FormControl(); // Reactive form control for the search input
   results: any[] = []; // Array to store the results from the API
+  isLoading = false; // Flag to track loading state
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // Listen for changes in the search input and query the API
@@ -20,10 +22,18 @@ export class UmdSemanticSearchComponent {
       .pipe(
         debounceTime(300), // Wait for 300ms after the user stops typing
         distinctUntilChanged(), // Only proceed if the value has changed
-        switchMap((searchTerm) => this.queryApi(searchTerm)) // Switch to a new observable for each search term
+        switchMap((searchTerm) => {
+          this.isLoading = true; // Set loading to true before making the API call
+          this.cdr.detectChanges(); // Trigger change detection
+          return this.queryApi(searchTerm).pipe(
+            finalize(() => (this.isLoading = false)) // Set loading to false after the API call completes
+          );
+        })
       )
       .subscribe((data: any) => {
         this.results = data; // Assign the API response to the results array
+        this.isLoading = false;
+        this.cdr.detectChanges();
       });
   }
 
