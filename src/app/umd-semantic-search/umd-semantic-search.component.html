@@ -1,1 +1,16 @@
-<h1>Hello, world!</h1>
+<div class="search-container">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Enter search term"
+      class="search-input"
+    />
+  </div>
+
+  <div class="results-container">
+    <ul>
+      <li *ngFor="let result of results">
+        {{ result | json }}
+      </li>
+    </ul>
+  </div>
