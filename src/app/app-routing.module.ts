@@ -145,6 +145,12 @@ import { ThemedPageErrorComponent } from './page-error/themed-page-error.compone
             canActivate: [EndUserAgreementCurrentUserGuard]
           },
           {
+            path: 'semantic-search',
+            loadChildren: () => import('./semantic-search/semantic-search-routing.module')
+              .then((m) => m.SemanticSearchRoutingModule),
+            canActivate: [EndUserAgreementCurrentUserGuard]
+          },
+          {
             path: 'browse',
             loadChildren: () => import('./browse-by/browse-by-page.module')
               .then((m) => m.BrowseByPageModule),
