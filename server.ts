@@ -226,8 +226,16 @@ export function app() {
  * The callback function to serve server side angular
  */
 function ngApp(req, res, next) {
+  const allHeaders = req.headers;
+  console.log('--------- Request --------------');
+  const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+  console.log('Full URL: ' + fullUrl);
+  console.log('---- Request Headers');
+  console.log(allHeaders);
+  console.log('--------------------------------');
   if (environment.ssr.enabled && req.method === 'GET' && (req.path === '/' || !isExcludedFromSsr(req.path, environment.ssr.excludePathPatterns))) {
     // Render the page to user via SSR (server side rendering)
+    console.log('Using Server Side Rendeing for ' + fullUrl);
     serverSideRender(req, res, next);
   } else {
     // If preboot is disabled, just serve the client
